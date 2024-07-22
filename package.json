@@ -50,6 +50,7 @@
     "@types/uuid": "^9.0.3",
     "@uiw/codemirror-themes": "^4.22.0",
     "@uiw/react-codemirror": "^4.21.18",
+    "@uiw/react-markdown-editor": "^6.1.2",
     "buffer": "^6.0.3",
     "chrono-node": "^2.7.0",
     "clsx": "^2.1.0",

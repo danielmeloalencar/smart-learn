@@ -6,6 +6,20 @@
   @apply outline-none;
 }
 
+/* Markdown Editor Component*/
+.ͼ17 {
+  background-color:transparent;
+}
+
+.ͼ17 .cm-gutters {
+  background-color:transparent;
+}
+
+.md-editor {
+  background-color:transparent;
+}
+/* Markdown Editor Component*/
+
 .cm-editor .cm-content {
   /* Hide the native cursor */
   @apply fine:[caret-color:transparent];

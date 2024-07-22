@@ -78,6 +78,14 @@ export function SettingsPage() {
             />
             <label htmlFor="line-numbers">Número de linhas</label>
           </div>
+          <div className="flex items-center gap-3">
+            <Switch
+              id="toolbars"
+              defaultChecked={editorSettings.toolbars}
+              onCheckedChange={(checked) => setEditorSettings({ toolbars: checked })}
+            />
+            <label htmlFor="toolbars">Barra de Ferramentas </label>
+          </div>
         </Card>
       </div>
     </Panel>

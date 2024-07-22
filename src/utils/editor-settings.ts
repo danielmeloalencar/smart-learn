@@ -5,6 +5,7 @@ const EDITOR_SETTINGS_KEY = "editor_settings"
 const editorSettingsSchema = z.object({
   vimMode: z.boolean().default(false),
   lineNumbers: z.boolean().default(false),
+  toolbars:  z.boolean().default(true),
 })
 
 export function getEditorSettings() {

@@ -28,6 +28,10 @@ import { parseFrontmatter } from "../utils/parse-frontmatter"
 import { removeParentTags } from "../utils/remove-parent-tags"
 import { useInsertTemplate } from "./insert-template"
 
+import MarkdownEditor from '@uiw/react-markdown-editor';
+
+
+
 type NoteEditorProps = {
   className?: string
   defaultValue?: string
@@ -135,12 +139,14 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
     }
 
     return (
-      <CodeMirror
+      <MarkdownEditor
         ref={ref}
         className={className}
         placeholder={placeholder}
         value={defaultValue}
-        theme={theme}
+        thclas
+        showToolbar={editorSettings.toolbars}
+        enablePreview={editorSettings.toolbars}
         basicSetup={{
           lineNumbers: editorSettings.lineNumbers,
           foldGutter: false,
