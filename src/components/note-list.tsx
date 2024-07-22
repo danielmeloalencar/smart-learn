@@ -14,7 +14,7 @@ import { Button } from "./button"
 import { Dice } from "./dice"
 import { DropdownMenu } from "./dropdown-menu"
 import { IconButton } from "./icon-button"
-import { CardsIcon16, CloseIcon12, ListIcon16, PinFillIcon12, TagIcon16 } from "./icons"
+import { CardsIcon16, CloseIcon12, ListIcon16, PinFillIcon12, TagIcon16, NoteTemplateIcon16 } from "./icons"
 import { Link } from "./link"
 import { LinkHighlightProvider } from "./link-highlight-provider"
 import { NoteCard } from "./note-card"
@@ -156,6 +156,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
                 }}
               />
             </div>
+            {editorSettings.hideTemplates && <div className="flex justify-between"><span></span><span className="text-text-danger opacity-50">Templates estão ocultos nas configurações</span></div> }
             {query ? (
               <span className="text-sm text-text-secondary">
                 {pluralize(noteResults.length, "resultado")}
