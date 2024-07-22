@@ -15,8 +15,13 @@
   background-color:transparent;
 }
 
+.md-editor-toolbar-warp {
+  height:50px !important;
+}
+
 .md-editor {
   background-color:transparent;
+  min-height:150px!important;
 }
 
 .md-editor-preview{
