@@ -137,14 +137,14 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
     if (editorSettings.vimMode) {
       extensions.push(vim())
     }
-
+    // ignorar esta linha eslint
+    // @ts-ignore
     return (
       <MarkdownEditor
         ref={ref}
         className={className}
         placeholder={placeholder}
         value={defaultValue}
-        thclas
         showToolbar={editorSettings.toolbars}
         enablePreview={editorSettings.toolbars}
         basicSetup={{
