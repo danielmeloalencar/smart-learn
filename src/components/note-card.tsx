@@ -537,7 +537,7 @@ const _NoteCard = React.memo(function NoteCard({
           editorValue ? (
             <Markdown onChange={handleChange}>{editorValue}</Markdown>
           ) : (
-            <span className="italic text-text-secondary">Nova vazia</span>
+            <span className="italic text-text-secondary">Nota vazia</span>
           )
         ) : null}
 
