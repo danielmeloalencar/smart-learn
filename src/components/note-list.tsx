@@ -22,7 +22,7 @@ import { NoteFavicon } from "./note-favicon"
 import { usePanel, usePanelActions } from "./panels"
 import { PillButton } from "./pill-button"
 import { SearchInput } from "./search-input"
-
+import { getEditorSettings } from "../utils/editor-settings"
 const viewTypeSchema = z.enum(["list", "cards"])
 
 type ViewType = z.infer<typeof viewTypeSchema>
@@ -39,7 +39,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
     validate: z.string().catch("").parse,
     replace: true,
   })
-
+  const editorSettings = getEditorSettings()
   const [debouncedQuery] = useDebouncedValue(query, 200, { leading: true })
 
   const noteResults = React.useMemo(() => {
@@ -243,7 +243,12 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
             ) : null}
           </div>
           {viewType === "cards"
-            ? noteResults.slice(0, numVisibleNotes).map(({ id }) => <NoteCard key={id} id={id} />)
+            ? noteResults.slice(0, numVisibleNotes).map((note) =>  { 
+              const parsedTemplate = templateSchema
+              .omit({ body: true })
+              .safeParse(note.frontmatter.template)
+              if ((parsedTemplate.success && !editorSettings.hideTemplates )|| !parsedTemplate.success)  return <NoteCard key={note.id} id={note.id} />
+            })
             : null}
           {viewType === "list" ? (
             <ul>
@@ -253,7 +258,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
                   .safeParse(note.frontmatter.template)
                 return (
                   // TODO: Move this into a NoteItem component
-                  <li key={note.id}>
+                  ((parsedTemplate.success && !editorSettings.hideTemplates )||!parsedTemplate.success) ? <li key={note.id}>
                     <Link
                       // Used for focus management
                       data-note-id={note.id}
@@ -278,7 +283,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
                         </span>
                       </span>
                     </Link>
-                  </li>
+                  </li>:null
                 )
               })}
             </ul>

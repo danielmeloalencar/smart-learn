@@ -86,6 +86,14 @@ export function SettingsPage() {
             />
             <label htmlFor="toolbars">Barra de Ferramentas </label>
           </div>
+          <div className="flex items-center gap-3">
+            <Switch
+              id="hideTemplates"
+              defaultChecked={editorSettings.hideTemplates}
+              onCheckedChange={(checked) => setEditorSettings({ hideTemplates: checked })}
+            />
+            <label htmlFor="hideTemplates">Ocultar Templates</label>
+          </div>
         </Card>
       </div>
     </Panel>
