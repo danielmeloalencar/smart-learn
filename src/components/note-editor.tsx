@@ -147,8 +147,8 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
         className={className}
         placeholder={placeholder}
         value={defaultValue}
-        showToolbar={isDesktop && editorSettings.toolbars}
-        enablePreview={isDesktop && editorSettings.toolbars}
+        showToolbar={editorSettings.toolbars}
+        toolbarsMode={(isDesktop && editorSettings.toolbars)&&['preview','fullscreen']}
         basicSetup={{
           lineNumbers: editorSettings.lineNumbers,
           foldGutter: false,
