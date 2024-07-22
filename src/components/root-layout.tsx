@@ -47,7 +47,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
           </div>
         ) : null}
         <DevBar />
-        <div className="text-center">Copyright © 2024 Daniel Melo Alencar - danielmalencar2011@gmail.com - <a href="https://www.linkedin.com/in/daniel-melo-alencar/">Contato</a></div>
+        <div className="text-center text-text-tertiary ">Copyright © 2024 Daniel Melo Alencar - danielmalencar2011@gmail.com - <a href="https://www.linkedin.com/in/daniel-melo-alencar/">Contato</a></div>
       </div>
     </Panels.Provider>
   )
