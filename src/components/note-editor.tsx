@@ -29,7 +29,7 @@ import { removeLeadingEmoji } from "../utils/emoji"
 import { parseFrontmatter } from "../utils/parse-frontmatter"
 import { removeParentTags } from "../utils/remove-parent-tags"
 import { useInsertTemplate } from "./insert-template"
-
+import { useMedia } from "react-use"
 import MarkdownEditor from '@uiw/react-markdown-editor';
 
 
@@ -44,7 +44,7 @@ type NoteEditorProps = {
   onStateChange?: (event: ViewUpdate) => void
   onPaste?: (event: ClipboardEvent, view: EditorView) => void
 }
-
+/*
 const theme = createTheme({
   theme: "light",
   settings: {
@@ -60,7 +60,7 @@ const theme = createTheme({
   },
   styles: [],
 })
-
+*/
 const syntaxHighlighter = HighlightStyle.define([
   {
     tag: tags.heading1,
@@ -111,6 +111,7 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
     const [isTooltipOpen, setIsTooltipOpen] = React.useState(false)
     const editorSettings = getEditorSettings()
 
+    const isDesktop = useMedia("(min-width: 640px)")
     // Completions
     const noteCompletion = useNoteCompletion()
     const tagSyntaxCompletion = useTagSyntaxCompletion() // #tag
@@ -146,8 +147,8 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
         className={className}
         placeholder={placeholder}
         value={defaultValue}
-        showToolbar={editorSettings.toolbars}
-        enablePreview={editorSettings.toolbars}
+        showToolbar={isDesktop && editorSettings.toolbars}
+        enablePreview={isDesktop && editorSettings.toolbars}
         basicSetup={{
           lineNumbers: editorSettings.lineNumbers,
           foldGutter: false,
