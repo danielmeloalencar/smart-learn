@@ -27,9 +27,10 @@ export function NotesPanel({ id, onClose }: PanelProps) {
         {isEmpty ? (
           <div className="flex w-full flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <h1 className="text-lg font-semibold">Choose a repository</h1>
+              <h1 className="text-lg font-semibold">Escolhar um repositório</h1>
               <p className="text-text-secondary">
-                Store your notes as markdown files in a GitHub repository of your choice.
+                Guarde suas notas em arquivos markdown num repositório do GitHub de sua escolha.
+                Ao criar um repositório novo, o mesmo ficará privado.
               </p>
             </div>
             <RepoForm />
@@ -39,7 +40,7 @@ export function NotesPanel({ id, onClose }: PanelProps) {
         {isCloningRepo ? (
           <span className="inline-flex items-center gap-2 leading-4 text-text-secondary">
             <LoadingIcon16 />
-            Cloning {githubRepo?.owner}/{githubRepo?.name}…
+            Clonando {githubRepo?.owner}/{githubRepo?.name}…
           </span>
         ) : null}
 

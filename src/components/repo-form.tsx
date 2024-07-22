@@ -13,6 +13,7 @@ type RepoFormProps = {
   onCancel?: () => void
 }
 
+//Lembrar de ler https://docs.github.com/pt/rest/repos/contents?apiVersion=2022-11-28#create-a-file
 export function RepoForm({ onSubmit, onCancel }: RepoFormProps) {
   const send = useSetAtom(globalStateMachineAtom)
   const githubUser = useAtomValue(githubUserAtom)
@@ -130,20 +131,20 @@ export function RepoForm({ onSubmit, onCancel }: RepoFormProps) {
           <div className="flex items-center gap-2">
             <RadioGroup.Item id="repo-new" value="new" />
             <label htmlFor="repo-new" className="leading-4">
-              Create a new repository
+              Criar novo repositório
             </label>
           </div>
           <div className="flex items-center gap-2">
             <RadioGroup.Item id="repo-existing" value="existing" />
             <label htmlFor="repo-existing" className="leading-4">
-              Select an existing repository
+              Selecionar repositório existente
             </label>
           </div>
         </RadioGroup>
         <div className="flex flex-col gap-4">
           <div className="grid flex-grow gap-2">
             <label htmlFor="repo-owner" className="justify-self-start leading-4">
-              Repository owner
+              Proprietário do Repositório
             </label>
             <TextInput
               id="repo-owner"
@@ -155,7 +156,7 @@ export function RepoForm({ onSubmit, onCancel }: RepoFormProps) {
           </div>
           <div className="grid flex-grow gap-2">
             <label htmlFor="repo-name" className="justify-self-start leading-4">
-              Repository name
+              Nome do Repositório
             </label>
             <TextInput
               id="repo-name"
@@ -170,7 +171,7 @@ export function RepoForm({ onSubmit, onCancel }: RepoFormProps) {
           <div className="flex flex-shrink-0 gap-2 sm:ml-auto">
             {onCancel ? (
               <Button className="w-full" onClick={onCancel}>
-                Cancel
+                Cancelar
               </Button>
             ) : null}
             <Button
@@ -179,7 +180,7 @@ export function RepoForm({ onSubmit, onCancel }: RepoFormProps) {
               variant="primary"
               disabled={isLoading}
             >
-              {isLoading ? <LoadingIcon16 /> : repoType === "new" ? "Create" : "Select"}
+              {isLoading ? <LoadingIcon16 /> : repoType === "new" ? "Criar" : "Selecionar"}
             </Button>
           </div>
           {error ? (
