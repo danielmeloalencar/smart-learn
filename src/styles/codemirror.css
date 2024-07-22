@@ -18,6 +18,13 @@
 .md-editor {
   background-color:transparent;
 }
+
+.md-editor-preview{
+  background-color:transparent;
+}
+.wmde-markdown {
+  background-color:transparent;
+}
 /* Markdown Editor Component*/
 
 .cm-editor .cm-content {
