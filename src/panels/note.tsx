@@ -26,7 +26,7 @@ export function NotePanel({ id, params = {}, onClose }: PanelProps) {
     <Panel
       id={id}
       key={noteId}
-      title={!note ? "New note" : "Note"}
+      title={!note ? "Nova Nota" : "Nota"}
       icon={<NoteIcon16 />}
       onClose={onClose}
     >
@@ -34,7 +34,7 @@ export function NotePanel({ id, params = {}, onClose }: PanelProps) {
         <NoteCard id={noteId} />
         {note?.backlinks?.length ? (
           <Details>
-            <Details.Summary>Backlinks</Details.Summary>
+            <Details.Summary>Conexões</Details.Summary>
             <LinkHighlightProvider href={`/${noteId}`}>
               <NoteList baseQuery={`link:"${noteId}" -id:"${noteId}"`} />
             </LinkHighlightProvider>

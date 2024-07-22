@@ -35,7 +35,7 @@ export function SettingsPage() {
                 {isCloning ? (
                   <span className="inline-flex items-center gap-2 leading-5 text-text-secondary">
                     <LoadingIcon16 />
-                    Cloning {githubRepo.owner}/{githubRepo.name}…
+                    Clonando {githubRepo.owner}/{githubRepo.name}…
                   </span>
                 ) : (
                   <a
@@ -49,7 +49,7 @@ export function SettingsPage() {
                 )}
               </div>
               <Button className="flex-shrink-0" onClick={() => setIsEditingRepo(true)}>
-                Change
+                Alterar
               </Button>
             </Card>
           ) : (
@@ -68,7 +68,7 @@ export function SettingsPage() {
               defaultChecked={editorSettings.vimMode}
               onCheckedChange={(checked) => setEditorSettings({ vimMode: checked })}
             />
-            <label htmlFor="vim-mode">Vim mode</label>
+            <label htmlFor="vim-mode">Modo Vim</label>
           </div>
           <div className="flex items-center gap-3">
             <Switch
@@ -76,7 +76,7 @@ export function SettingsPage() {
               defaultChecked={editorSettings.lineNumbers}
               onCheckedChange={(checked) => setEditorSettings({ lineNumbers: checked })}
             />
-            <label htmlFor="line-numbers">Line numbers</label>
+            <label htmlFor="line-numbers">Número de linhas</label>
           </div>
         </Card>
       </div>

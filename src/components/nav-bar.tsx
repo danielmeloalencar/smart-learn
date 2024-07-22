@@ -61,14 +61,14 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
         className={cx("flex p-2", { left: "h-full flex-col gap-2", bottom: "flex-row" }[position])}
       >
         <li className={cx({ left: "flex-grow-0", bottom: "flex-grow" }[position])}>
-          <NavLink to="/" aria-label="Notes" tooltipSide={tooltipSide} end>
+          <NavLink to="/" aria-label="Notas" tooltipSide={tooltipSide} end>
             {({ isActive }) => (isActive ? <NoteFillIcon24 /> : <NoteIcon24 />)}
           </NavLink>
         </li>
         <li className={cx({ left: "flex-grow-0", bottom: "flex-grow" }[position])}>
           <NavLink
             to={`/${toDateString(new Date())}`}
-            aria-label="Calendar"
+            aria-label="Calendário"
             active={isCalendarActive}
             tooltipSide={tooltipSide}
             end
@@ -104,28 +104,28 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
               </IconButton>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content side={tooltipSide} align="end">
-              <DropdownMenu.Item onClick={signOut}>Sign out</DropdownMenu.Item>
+              <DropdownMenu.Item onClick={signOut}>Desconectar (Sair)</DropdownMenu.Item>
               <DropdownMenu.Separator />
               <DropdownMenu.Item
                 href="https://github.com/colebemis/lumen/issues/new"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Share feedback
+                Compartilhar feedback
               </DropdownMenu.Item>
               <DropdownMenu.Item
                 href="https://lumen-notes.github.io/lumen"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Documentation
+                Documentação
               </DropdownMenu.Item>
               <DropdownMenu.Item
                 href="https://lumen-notes.github.io/lumen/keyboard-shortcuts"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Keyboard shortcuts
+                Atalhos
               </DropdownMenu.Item>
               <DropdownMenu.Separator />
               {position === "bottom" ? <SyncDropdownMenuItem /> : null}
@@ -134,7 +134,7 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
                 onClick={() => navigate("/settings")}
                 shortcut={["⌘", ","]}
               >
-                Settings
+                Configurações
               </DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu>
@@ -228,7 +228,7 @@ function NewNoteButton({
   return (
     <IconButton
       className={className}
-      aria-label="New note"
+      aria-label="Nova nota"
       tooltipSide={tooltipSide}
       onClick={() => navigate(`/${Date.now()}`)}
       shortcut={["⌘", "I"]}

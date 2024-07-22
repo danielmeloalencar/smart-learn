@@ -22,7 +22,7 @@ export function NotesPanel({ id, onClose }: PanelProps) {
   const githubRepo = useAtomValue(githubRepoAtom)
 
   return (
-    <Panel id={id} title="Notes" icon={<NoteIcon16 />} onClose={onClose}>
+    <Panel id={id} title="Notas" icon={<NoteIcon16 />} onClose={onClose}>
       <div className="p-4">
         {isEmpty ? (
           <div className="flex w-full flex-col gap-4">

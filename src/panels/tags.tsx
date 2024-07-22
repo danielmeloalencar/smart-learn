@@ -35,13 +35,13 @@ export function TagsPanel({ id, onClose }: PanelProps) {
       <div className="flex flex-col gap-2 p-4">
         <div className="flex flex-col gap-2">
           <SearchInput
-            placeholder={`Search ${pluralize(sortedTagEntries.length, "tag")}…`}
+            placeholder={`Pesquisar em ${pluralize(sortedTagEntries.length, "tag")}…`}
             value={query}
             onChange={setQuery}
           />
           {deferredQuery ? (
             <span className="coarse:sm text-sm text-text-secondary">
-              {pluralize(searchResults.length, "result")}
+              {pluralize(searchResults.length, "resultado")}
             </span>
           ) : null}
         </div>

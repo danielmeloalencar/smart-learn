@@ -132,7 +132,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
           <div className="flex flex-col gap-2">
             <div className="grid grid-cols-[1fr_auto_auto] gap-2">
               <SearchInput
-                placeholder={`Search ${pluralize(noteResults.length, "note")}…`}
+                placeholder={`Pesquisar entre ${pluralize(noteResults.length, "nota")}…`}
                 value={query}
                 onChange={(value) => {
                   setQuery(value)
@@ -142,7 +142,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
                 }}
               />
               <IconButton
-                aria-label={viewType === "cards" ? "List view" : "Card view"}
+                aria-label={viewType === "cards" ? "Ver em lista" : "Ver em cartões"}
                 className="h-10 w-10 rounded-md bg-bg-secondary hover:bg-bg-tertiary coarse:h-12 coarse:w-12"
                 onClick={() => setViewType(viewType === "cards" ? "list" : "cards")}
               >
@@ -158,7 +158,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
             </div>
             {query ? (
               <span className="text-sm text-text-secondary">
-                {pluralize(noteResults.length, "result")}
+                {pluralize(noteResults.length, "resultado")}
               </span>
             ) : null}
           </div>
@@ -220,7 +220,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
                 {sortedTagFrequencies.length > numVisibleTags ? (
                   <DropdownMenu>
                     <DropdownMenu.Trigger asChild>
-                      <PillButton variant="dashed">Show more</PillButton>
+                      <PillButton variant="dashed">Mostrar mais</PillButton>
                     </DropdownMenu.Trigger>
                     <DropdownMenu.Content>
                       {sortedTagFrequencies.slice(numVisibleTags).map(([tag, frequency]) => (
@@ -287,7 +287,7 @@ export function NoteList({ baseQuery = "" }: NoteListProps) {
 
         {noteResults.length > numVisibleNotes ? (
           <Button ref={bottomRef} className="mt-4 w-full" onClick={loadMore}>
-            Load more
+            Carregar mais
           </Button>
         ) : null}
       </div>
@@ -302,7 +302,7 @@ function DiceButton({ disabled = false, onClick }: { disabled?: boolean; onClick
   return (
     <IconButton
       disabled={disabled}
-      aria-label="Roll the dice"
+      aria-label="Jogue o dado"
       className="group/dice h-10 w-10 rounded-md bg-bg-secondary hover:bg-bg-tertiary coarse:h-12 coarse:w-12"
       onClick={() => {
         setAngle((angle) => angle + 180)

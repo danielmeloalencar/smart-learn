@@ -81,14 +81,14 @@ export function Panel({
                         icon={<CenteredIcon16 />}
                         onSelect={() => setLayout("centered")}
                       >
-                        Centered layout
+                        Layout centralizado
                       </DropdownMenu.Item>
                       <DropdownMenu.Item
                         selected={layout === "fullwidth"}
                         icon={<FullwidthIcon16 />}
                         onSelect={() => setLayout("fullwidth")}
                       >
-                        Fullwidth layout
+                        Layout largura competa
                       </DropdownMenu.Item>
                     </>
                   ) : null}

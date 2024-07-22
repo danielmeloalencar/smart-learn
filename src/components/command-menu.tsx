@@ -139,7 +139,7 @@ export function CommandMenu() {
       }}
     >
       <Card elevation={3}>
-        <Command.Input placeholder="Search or jump to…" value={query} onValueChange={setQuery} />
+        <Command.Input placeholder="Procurar ou pular para…" value={query} onValueChange={setQuery} />
         <Command.List>
           {dateString ? (
             <Command.Group heading="Date">
@@ -159,7 +159,7 @@ export function CommandMenu() {
                 <CommandItem
                   key={name}
                   icon={<TagIcon16 />}
-                  description={pluralize(noteIds.length, "note")}
+                  description={pluralize(noteIds.length, "nota")}
                   onSelect={() => navigate(`/tags/${name}`)}
                 >
                   {name}
@@ -167,31 +167,31 @@ export function CommandMenu() {
               ))}
               {tagResults.length > numVisibleTags ? (
                 <CommandItem
-                  key={`Show all tags matching "${debouncedQuery}"`}
+                  key={`Mostrar todas tags com "${debouncedQuery}"`}
                   icon={<SearchIcon16 />}
                   onSelect={() => navigate(`/tags?${qs.stringify({ q: debouncedQuery })}`)}
                 >
-                  Show all {pluralize(tagResults.length, "tag")} matching "{debouncedQuery}"
+                  Mostarar todas {pluralize(tagResults.length, "tag")} com "{debouncedQuery}"
                 </CommandItem>
               ) : null}
             </Command.Group>
           ) : null}
           {debouncedQuery ? (
-            <Command.Group heading="Notes">
+            <Command.Group heading="Notas">
               {noteResults.slice(0, numVisibleNotes).map((note) => (
                 <NoteItem key={note.id} note={note} onSelect={() => navigate(`/${note.id}`)} />
               ))}
               {noteResults.length > 0 ? (
                 <CommandItem
-                  key={`Show all notes matching "${debouncedQuery}"`}
+                  key={`Mostrar todas notas com "${debouncedQuery}"`}
                   icon={<SearchIcon16 />}
                   onSelect={() => navigate(`/?${qs.stringify({ query: debouncedQuery })}`)}
                 >
-                  Show all {pluralize(noteResults.length, "note")} matching "{debouncedQuery}"
+                  Mostrar todas {pluralize(noteResults.length, "note")} com "{debouncedQuery}"
                 </CommandItem>
               ) : null}
               <CommandItem
-                key={`Create new note "${debouncedQuery}"`}
+                key={`Criar nova nota "${debouncedQuery}"`}
                 icon={<PlusIcon16 />}
                 onSelect={() => {
                   const note = {
@@ -211,27 +211,27 @@ export function CommandMenu() {
             </Command.Group>
           ) : (
             <>
-              <Command.Group heading="Jump to">
+              <Command.Group heading="Pular para">
                 <CommandItem
                   key="Notes"
                   icon={<NoteIcon16 />}
                   onSelect={() => navigate(`/`, { openInPanel: false })}
                 >
-                  Notes
+                  Notas
                 </CommandItem>
                 <CommandItem
-                  key="Today"
+                  key="Hoje"
                   icon={<CalendarIcon16>{new Date().getDate()}</CalendarIcon16>}
                   onSelect={() => navigate(`/${toDateString(new Date())}`, { openInPanel: false })}
                 >
-                  Today
+                  Hoje
                 </CommandItem>
                 <CommandItem
-                  key="This week"
+                  key="Esta semana"
                   icon={<CalendarIcon16>W</CalendarIcon16>}
                   onSelect={() => navigate(`/${toWeekString(new Date())}`, { openInPanel: false })}
                 >
-                  This week
+                  Esta semana
                 </CommandItem>
                 <CommandItem
                   key="Tags"
@@ -245,10 +245,10 @@ export function CommandMenu() {
                   icon={<SettingsIcon16 />}
                   onSelect={() => navigate("/settings", { openInPanel: false })}
                 >
-                  Settings
+                  Configurações
                 </CommandItem>
               </Command.Group>
-              <Command.Group heading="Pinned">
+              <Command.Group heading="Fixadas">
                 {pinnedNotes.map((note) => (
                   <NoteItem key={note.id} note={note} onSelect={() => navigate(`/${note.id}`)} />
                 ))}

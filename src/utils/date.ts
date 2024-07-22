@@ -13,28 +13,28 @@ import {
 // Date utilities
 
 export const MONTH_NAMES = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Janeiro",
+  "Fevereiro",
+  "Março",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro",
 ]
 
 export const DAY_NAMES = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  "Domingo",
+  "Segunda",
+  "Terça",
+  "Quarta",
+  "Quinta",
+  "Sexta",
+  "Sábdo",
 ]
 
 const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/
@@ -106,17 +106,17 @@ export function formatDateDistance(dateString: string) {
 
   // Is today?
   if (isSameDay(nowUtc, then)) {
-    return "Today"
+    return "Hoje"
   }
 
   // Is tomorrow?
   if (isSameDay(addDays(nowUtc, 1), then)) {
-    return "Tomorrow"
+    return "Amanhã"
   }
 
   // Is yesterday?
   if (isSameDay(subDays(nowUtc, 1), then)) {
-    return "Yesterday"
+    return "Ontem"
   }
 
   return formatDistance(then, nowUtc, {
@@ -138,7 +138,7 @@ export function formatWeek(weekString: string) {
   const match = weekString.match(WEEK_REGEX)
   if (!match) return ""
   const { year, week } = match.groups!
-  return `Week ${Number(week)}, ${Number(year)}`
+  return `Semana ${Number(week)}, ${Number(year)}`
 }
 
 /**
@@ -157,15 +157,15 @@ export function formatWeekDistance(weekString: string) {
   const weeksDiff = differenceInCalendarISOWeeks(weekDate, currentDate)
 
   if (weeksDiff === 0) {
-    return "This week"
+    return "Esta semana"
   } else if (weeksDiff === 1) {
-    return "Next week"
+    return "Próxima semana"
   } else if (weeksDiff === -1) {
-    return "Last week"
+    return "Última semana"
   } else if (weeksDiff < 0) {
-    return `${Math.abs(weeksDiff)} weeks ago`
+    return `${Math.abs(weeksDiff)} semanas atrás`
   } else {
-    return `In ${Math.abs(weeksDiff)} weeks`
+    return `Em ${Math.abs(weeksDiff)} semanas`
   }
 }
 

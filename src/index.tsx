@@ -21,7 +21,7 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
     <div role="alert" className="space-y-4 p-4">
       <Markdown>{`# Error\n\n\`\`\`\n${error.message}\n\`\`\``}</Markdown>
-      <Button onClick={resetErrorBoundary}>Try again</Button>
+      <Button onClick={resetErrorBoundary}>Tentar novamente</Button>
     </div>
   )
 }

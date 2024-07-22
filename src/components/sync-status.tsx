@@ -29,14 +29,14 @@ export function useSyncStatusText() {
   }
 
   if (isSyncSuccess) {
-    return "Synced"
+    return "Sincronizar"
   }
 
   if (isSyncError) {
     return "Sync error"
   }
 
-  return "Syncing…"
+  return "Sincronizando…"
 }
 
 export function SyncStatusIcon({ size }: { size: 16 | 24 }) {

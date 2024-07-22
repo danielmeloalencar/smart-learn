@@ -389,7 +389,7 @@ const _NoteCard = React.memo(function NoteCard({
             <>
               <span>·</span>
               <span className="whitespace-nowrap">
-                {pluralize(note.backlinks.length, "backlink")}
+               {note.backlinks.length>1?`${note.backlinks.length +' conexões'}`: `${note.backlinks.length +' conexão'}`}
               </span>
             </>
           ) : null}
@@ -402,11 +402,11 @@ const _NoteCard = React.memo(function NoteCard({
           )}
         >
           {mode === "write" ? (
-            <IconButton aria-label="View mode" shortcut={["⌘", "E"]} onClick={switchToReading}>
+            <IconButton aria-label="Visualizar" shortcut={["⌘", "E"]} onClick={switchToReading}>
               <EyeIcon16 />
             </IconButton>
           ) : (
-            <IconButton aria-label="Edit mode" shortcut={["⌘", "E"]} onClick={switchToWriting}>
+            <IconButton aria-label="Editar" shortcut={["⌘", "E"]} onClick={switchToWriting}>
               <EditIcon16 />
             </IconButton>
           )}
@@ -421,7 +421,7 @@ const _NoteCard = React.memo(function NoteCard({
                 {isDirty ? (
                   <>
                     <DropdownMenu.Item icon={<UndoIcon16 />} onSelect={discardChanges}>
-                      Discard changes
+                      Descartar mudanças
                     </DropdownMenu.Item>
                     <DropdownMenu.Separator />
                   </>
@@ -446,14 +446,14 @@ const _NoteCard = React.memo(function NoteCard({
                   onSelect={() => copy(note?.content || "")}
                   shortcut={["⌘", "C"]}
                 >
-                  Copy markdown
+                  Copiar markdown
                 </DropdownMenu.Item>
                 <DropdownMenu.Item
                   icon={<CopyIcon16 />}
                   onSelect={() => copy(id)}
                   shortcut={["⌘", "⇧", "C"]}
                 >
-                  Copy ID
+                  Copiar ID
                 </DropdownMenu.Item>
                 <DropdownMenu.Separator />
                 <DropdownMenu.Item
@@ -462,7 +462,7 @@ const _NoteCard = React.memo(function NoteCard({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Open in GitHub
+                  Abrir no GitHub
                 </DropdownMenu.Item>
                 <DropdownMenu.Item
                   icon={<ShareIcon16 />}
@@ -482,7 +482,7 @@ const _NoteCard = React.memo(function NoteCard({
                     window.open(url, "_blank")
                   }}
                 >
-                  Export as Gist
+                  Exportar como Gist
                 </DropdownMenu.Item>
                 <DropdownMenu.Separator />
                 <DropdownMenu.Item
@@ -494,10 +494,10 @@ const _NoteCard = React.memo(function NoteCard({
                       note &&
                       note.backlinks.length > 0 &&
                       !window.confirm(
-                        `${id}.md has ${pluralize(
+                        `${id}.md tem ${pluralize(
                           note.backlinks.length,
                           "backlink",
-                        )}. Are you sure you want to delete it?`,
+                        )}. Tem certeza que quer deletá-la?`,
                       )
                     ) {
                       return
@@ -507,14 +507,14 @@ const _NoteCard = React.memo(function NoteCard({
                   }}
                   shortcut={["⌘", "⌫"]}
                 >
-                  Delete
+                  Deletar
                 </DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu>
           ) : null}
           {onCancel ? (
             <Button onClick={onCancel} className="ml-2">
-              Cancel
+              Cancelar
             </Button>
           ) : null}
           {!note || isDirty ? (
@@ -527,7 +527,7 @@ const _NoteCard = React.memo(function NoteCard({
               shortcut={["⌘", "⏎"]}
               className="ml-2"
             >
-              {!note ? "Create" : "Save"}
+              {!note ? "Criar" : "Salvar"}
             </Button>
           ) : null}
         </div>
@@ -537,7 +537,7 @@ const _NoteCard = React.memo(function NoteCard({
           editorValue ? (
             <Markdown onChange={handleChange}>{editorValue}</Markdown>
           ) : (
-            <span className="italic text-text-secondary">Empty note</span>
+            <span className="italic text-text-secondary">Nova vazia</span>
           )
         ) : null}
 

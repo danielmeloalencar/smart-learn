@@ -23,7 +23,7 @@ export async function exportAsGist({
 
   const description = `${
     note.title ? `${note.title} · ` : ""
-  }Exported from Lumen (https://uselumen.com) on ${timestamp}`
+  }Exportada de Meu Segundo Cérebro (https://meusegundocerebro.netlify.app/) em ${timestamp}`
 
   const response = await fetch("https://api.github.com/gists", {
     method: "POST",

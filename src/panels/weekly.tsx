@@ -48,7 +48,7 @@ export function WeeklyPanel({ id, params = {}, onClose }: PanelProps) {
           <NoteCard id={week} defaultValue={weeklyTemplate} />
 
           <Details>
-            <Details.Summary>Days</Details.Summary>
+            <Details.Summary>Dias</Details.Summary>
             {daysOfWeek.map((date) => (
               <DailyNoteCard key={date} id={date} />
             ))}
@@ -56,7 +56,7 @@ export function WeeklyPanel({ id, params = {}, onClose }: PanelProps) {
 
           {hasBacklinks ? (
             <Details>
-              <Details.Summary>Backlinks</Details.Summary>
+              <Details.Summary>Conexões</Details.Summary>
               <LinkHighlightProvider href={`/${week}`}>
                 <NoteList baseQuery={`link:"${week}" -id:"${week}"`} />
               </LinkHighlightProvider>

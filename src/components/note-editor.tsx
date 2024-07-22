@@ -93,7 +93,7 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
     {
       className,
       defaultValue = "",
-      placeholder = "Write a note…",
+      placeholder = "Escrever uma nota…",
       autoFocus = false,
       onChange,
       onStateChange,
@@ -406,7 +406,7 @@ function useNoteCompletion() {
       const searchResults = searchNotes(query)
 
       const createNewNoteOption: Completion = {
-        label: `Create new note "${query}"`,
+        label: `Criar nova nota "${query}"`,
         apply: (view, completion, from, to) => {
           const note = {
             id: Date.now().toString(),

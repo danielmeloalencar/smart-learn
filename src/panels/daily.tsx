@@ -39,7 +39,7 @@ export function DailyPanel({ id, params = {}, onClose }: PanelProps) {
           <NoteCard id={date} defaultValue={dailyTemplate} />
           {backlinks.length > 0 ? (
             <Details>
-              <Details.Summary>Backlinks</Details.Summary>
+              <Details.Summary>Conexões</Details.Summary>
               <LinkHighlightProvider href={`/${date}`}>
                 <NoteList baseQuery={`link:"${date}" -id:"${date}"`} />
               </LinkHighlightProvider>

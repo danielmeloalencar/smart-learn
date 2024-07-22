@@ -114,7 +114,7 @@ function CalendarWeek({
       key={weekString}
       to={`/${weekString}`}
       aria-label={label}
-      name="Week"
+      name="Semana"
       shortName="W"
       number={weekNumber}
       isActive={isActive}
