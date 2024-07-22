@@ -119,7 +119,7 @@ export function InsertTemplateDialog() {
                   ),
                 )}
                 <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
-                  {isLoading ? <LoadingIcon16 /> : "Insert"}
+                  {isLoading ? <LoadingIcon16 /> : "Inserir"}
                 </Button>
                 {error ? (
                   <div className="flex items-start gap-2 text-text-danger">
