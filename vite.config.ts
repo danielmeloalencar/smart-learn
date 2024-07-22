@@ -20,7 +20,7 @@ export default defineConfig({
       injectRegister: "auto",
       manifest: {
         name: "Meu Segundo Cérebro",
-        short_name: "segundo-cerebro",
+        short_name: "Segundo Cérebro",
         description: "A simple note-taking app for better thinking",
         theme_color: "",
         icons: [
