@@ -73,7 +73,7 @@ function SignInButton({ className }: { className?: string }) {
         })
       }}
     >
-      Sign in with GitHub
+      Entrar com GitHub
     </Button>
   )
 }
@@ -97,7 +97,7 @@ export function SignedInUser() {
         </span>
       </div>
       <Button className="flex-shrink-0" onClick={signOut}>
-        Sign out
+        Sair
       </Button>
     </Card>
   )
