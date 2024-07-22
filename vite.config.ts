@@ -19,8 +19,8 @@ export default defineConfig({
       registerType: "prompt",
       injectRegister: "auto",
       manifest: {
-        name: "Lumen",
-        short_name: "Lumen",
+        name: "Meu Segundo Cérebro",
+        short_name: "segundo-cerebro",
         description: "A simple note-taking app for better thinking",
         theme_color: "",
         icons: [
