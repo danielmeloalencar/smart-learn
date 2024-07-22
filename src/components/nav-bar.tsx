@@ -121,9 +121,7 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
                 Documentação
               </DropdownMenu.Item>
               <DropdownMenu.Item
-                href="https://lumen-notes.github.io/lumen/keyboard-shortcuts"
-                target="_blank"
-                rel="noopener noreferrer"
+              onClick={() => navigate("/shortcuts")}
               >
                 Atalhos
               </DropdownMenu.Item>
