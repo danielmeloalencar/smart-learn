@@ -24,15 +24,21 @@ export function GitHubAuth({ children }: { children?: React.ReactNode }) {
 
   return isSignedOut ? (
     <div className="flex min-h-screen items-center justify-center pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] coarse:items-end coarse:sm:items-center [@supports(min-height:100svh)]:min-h-[100svh]">
-      <div className="flex w-full max-w-sm flex-col items-start px-4 py-8">
+      <div className="flex w-full max-w-lg flex-col items-start px-4 py-8">
         <LumenLogo size={24} className="mb-8" />
-        <h1 className="mb-1 text-xl font-semibold">Welcome to Lumen</h1>
+        <h1 className="mb-1 text-xl font-semibold">Bem-vindo ao seu Segundo Cérebro</h1>
         <p className="mb-8 text-text-secondary">
-          Lumen is a simple note-taking app for better thinking.{" "}
-          <a className="link link-external" href="https://uselumen.com">
-            Learn more
+        Segundo Cérebro é um aplicativo simples de anotações para pensar melhor sem sobrecarregar seu cérebro usando a metodologia Zettelkasten{" "}
+          <a className="link link-external" href="https://www.youtube.com/watch?v=aPoo0tT4wmw" target="_new">
+           Saiba mais
           </a>
         </p>
+        <h2 className="mb-2 text-lg font-semibold">Recursos</h2>
+        <ul className="flex justify-between  p-2 flex-1 md:flex-row flex-col items-center font-thin text-sm w-full text-center">
+          <li className="hover:bg-bg-secondary m-2 rounded-sm p-2 bg-bg-code-block md:w-32 flex-1  w-full">Salve anotações em repositórios do GitHub</li>
+          <li  className="hover:bg-bg-secondary m-2 rounded-sm p-2 bg-bg-code-block  md:w-32 flex-1  w-full">Use a metodologia Zettelkasten para organizar suas ideias</li>
+          <li className="hover:bg-bg-secondary m-2 rounded-sm p-2 bg-bg-code-block  md:w-32 flex-1  w-full">Conecte suas anotações com links</li>
+        </ul>
         <SignInButton />
       </div>
     </div>
