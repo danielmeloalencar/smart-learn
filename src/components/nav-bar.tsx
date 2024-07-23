@@ -107,7 +107,7 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
               <DropdownMenu.Item onClick={signOut}>Desconectar (Sair)</DropdownMenu.Item>
               <DropdownMenu.Separator />
               <DropdownMenu.Item
-                href="mailto://danielmalencar2011@gmail.com"
+                href="https://github.com/danielmeloalencar/smart-learn/issues/new"
                 target="_blank"
                 rel="noopener noreferrer"
               >
