@@ -10,6 +10,7 @@ import { ErrorIcon16 } from "./icons"
 import { InsertTemplateDialog } from "./insert-template"
 import { Panels } from "./panels"
 import { SyntaxHighlighter } from "./syntax-highlighter"
+import { useMedia } from "react-use"
 
 const errorAtom = selectAtom(globalStateMachineAtom, (state) => state.context.error)
 
@@ -19,7 +20,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
   const send = useSetAtom(globalStateMachineAtom)
   const { online } = useNetworkState()
   const location = useLocation()
-
+  const isDesktop = useMedia("(min-width: 640px)")
   // Sync when the app becomes visible again
   useEvent("visibilitychange", () => {
     if (document.visibilityState === "visible" && online) {
@@ -47,7 +48,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
           </div>
         ) : null}
         <DevBar />
-        <div className="text-center text-text-tertiary ">Copyright © 2024 Daniel Melo Alencar - danielmalencar2011@gmail.com - <a href="https://www.linkedin.com/in/daniel-melo-alencar/">Contato</a></div>
+        {isDesktop && <div className="text-center text-text-tertiary ">Copyright © 2024 Daniel Melo Alencar - danielmalencar2011@gmail.com - <a href="https://www.linkedin.com/in/daniel-melo-alencar/">Contato</a></div> }
       </div>
     </Panels.Provider>
   )
