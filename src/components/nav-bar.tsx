@@ -107,7 +107,7 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
               <DropdownMenu.Item onClick={signOut}>Desconectar (Sair)</DropdownMenu.Item>
               <DropdownMenu.Separator />
               <DropdownMenu.Item
-                href="https://github.com/colebemis/lumen/issues/new"
+                href="mailto://danielmalencar2011@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
