@@ -114,7 +114,7 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
                 Compartilhar feedback
               </DropdownMenu.Item>
               <DropdownMenu.Item
-                href="https://lumen-notes.github.io/lumen"
+                href="https://danielmeloalencar.github.io/smart-learn/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
