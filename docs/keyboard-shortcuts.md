@@ -1,4 +1,4 @@
-# Keyboard shortcuts
+# Atalhos do Teclado
 
 | Action              | Shortcut                  |
 | ------------------- | ------------------------- |
