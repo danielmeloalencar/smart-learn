@@ -12,7 +12,48 @@
 body {
   @apply bg-bg-inset font-body text-base text-text;
 }
+/*
+.css-1vpa56t .rs__cell{
+  border-color:#2d2d2d!important;
+}
 
+.css-lap9uk>.rs__agenda_row .rs__cell {
+  border-color:#2d2d2d!important;
+
+}
+
+.css-1ctx51t .rs__cell {
+  border-color:#2d2d2d!important;
+}
+.css-hn6mkc .rs__cell {
+  border-color:#2d2d2d!important;
+}
+
+.css-fai6u2{
+  border-color:#2d2d2d!important;
+}
+
+.rs__cell {
+  border-color:#2d2d2d!important;
+}
+.rs__time{
+  border-color:#2d2d2d!important;
+}
+
+.css-12aktbw{
+  border-color:#2d2d2d!important;
+}
+.css-12aktbw{
+  border-color:#2d2d2d!important;
+}
+
+.css-1630zfa{
+  border-color:#2d2d2d!important;
+}
+.css-1vpa56t{
+  border-color:#2d2d2d!important;
+}
+*/
 ::selection {
   background: var(--color-bg-selection);
 }

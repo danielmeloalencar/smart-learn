@@ -6,6 +6,8 @@ import { selectAtom } from "jotai/utils"
 import { assign, createMachine, raise } from "xstate"
 import { z } from "zod"
 import {
+  Calendar,
+  CalendarId,
   GitHubRepository,
   GitHubUser,
   Note,
@@ -486,7 +488,7 @@ async function getMarkdownFilesFromFs(dir: string) {
       if (filepath.startsWith(".git")) return
 
       // Ignore non-markdown files
-      if (!filepath.endsWith(".md")) return
+      if (!filepath.endsWith(".md") && !filepath.endsWith(".json") ) return
 
       // Get file content
       const content = await entry.content()
@@ -526,6 +528,23 @@ export const githubRepoAtom = selectAtom(
 // Notes
 // -----------------------------------------------------------------------------
 
+export const calendarsAtom = atom((get) => {
+  const state = get(globalStateMachineAtom)
+  const markdownFiles = state.context.markdownFiles
+  const calendars: Map<CalendarId, Calendar> = new Map()
+
+  // Parse notes
+  for (const filepath in markdownFiles) {
+   // pula notas que terminam com extensão .json
+    if (filepath.endsWith(".md")) continue
+    const id = filepath.replace(/\.json$/, "")
+    const content = markdownFiles[filepath]
+    calendars.set(id,  {id, content})
+  }
+
+  return calendars
+})
+
 export const notesAtom = atom((get) => {
   const state = get(globalStateMachineAtom)
   const markdownFiles = state.context.markdownFiles
@@ -533,6 +552,8 @@ export const notesAtom = atom((get) => {
 
   // Parse notes
   for (const filepath in markdownFiles) {
+   // pula notas que terminam com extensão .json
+    if (filepath.endsWith(".json")) continue
     const id = filepath.replace(/\.md$/, "")
     const content = markdownFiles[filepath]
     notes.set(id, { id, content, ...parseNote(content), backlinks: [] })

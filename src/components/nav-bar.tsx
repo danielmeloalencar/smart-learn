@@ -18,6 +18,7 @@ import { isValidDateString, isValidWeekString, toDateString } from "../utils/dat
 import { DropdownMenu } from "./dropdown-menu"
 import { useSignOut } from "./github-auth"
 import { IconButton } from "./icon-button"
+import EventNoteIcon from "@mui/icons-material/EventNote";
 import {
   CalendarFillIcon24,
   CalendarIcon24,
@@ -37,7 +38,7 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
   const navigate = useNavigateWithCache()
   const signOut = useSignOut()
   const isCalendarActive = useIsCalendarActive()
-
+  const isPlanejamentoActive = useIsPlanejamentoActive()
   // Open tooltips on the side opposite to the nav bar.
   const tooltipSide = ({ left: "right", bottom: "top" } as const)[position]
 
@@ -78,6 +79,17 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
             ) : (
               <CalendarIcon24>{new Date().getDate()}</CalendarIcon24>
             )}
+          </NavLink>
+        </li>
+        <li className={cx({ left: "flex-grow-0", bottom: "flex-grow" }[position])}>
+          <NavLink
+            to={`/plan/${toDateString(new Date())}`}
+            aria-label="Planejamento"
+            active={isPlanejamentoActive}
+            tooltipSide={tooltipSide}
+            end
+          >
+            <EventNoteIcon/>
           </NavLink>
         </li>
         <li className={cx({ left: "flex-grow-0", bottom: "flex-grow" }[position])}>
@@ -146,6 +158,12 @@ function useIsCalendarActive() {
   const location = useLocation()
   const path = location.pathname.slice(1)
   return isValidDateString(path) || isValidWeekString(path)
+}
+
+function useIsPlanejamentoActive() {
+  const location = useLocation()
+  const path = location.pathname.slice(1)
+  return isValidDateString(path) 
 }
 
 function NavLink({

@@ -2,6 +2,16 @@ import { z } from "zod"
 
 export type NoteId = string
 
+export type CalendarId = string
+export type Calendar = {
+  /** The markdown file path without the extension (e.g. `foo/bar.md` → `foo/bar`) */
+  id: CalendarId
+  /** The content of the markdown file */
+  content: string
+
+}
+
+
 export type Note = {
   /** The markdown file path without the extension (e.g. `foo/bar.md` → `foo/bar`) */
   id: NoteId

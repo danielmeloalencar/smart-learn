@@ -17,6 +17,7 @@ import { TagPage } from "./pages/tag"
 import { TagsPage } from "./pages/tags"
 import "./styles/index.css"
 import { ShortcutPage } from "./pages/shortcuts"
+import { PlanPage } from "./pages/plan"
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
@@ -42,7 +43,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
                   <Route path="file" element={<FilePage />} />
                   <Route path="settings" element={<SettingsPage />} />
                   <Route path="shortcuts" element={<ShortcutPage />} />
+                  <Route path="plan/*" element={<PlanPage />} />
                   <Route path="*" element={<NotePage />} />
+
                 </Route>
               </Routes>
             </RootLayout>
