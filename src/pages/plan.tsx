@@ -130,15 +130,15 @@ const handleEventDrop = async (
       mode: 'dark',
       primary: {
         main: '#4ccce6',
-        contrastText:'#fff'
+        contrastText:'#EEEEEC'
       },
       secondary: {
         main: '#d58493',
-        contrastText:'#fff'
+        contrastText:'#EEEEEC'
       },
       text:{
-        primary: '#fff',
-        secondary: '#fff'
+        primary: '#EEEEEC',
+        secondary: '#EEEEEC'
       }
      
       },
