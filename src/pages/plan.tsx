@@ -2,7 +2,6 @@ import { Panels } from "../components/panels"
 import { Scheduler } from "@aldabil/react-scheduler";
 import {ptBR} from 'date-fns/locale'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import  {  DragEvent,  useRef, useState } from "react"
 
 import { useSaveCalendar, useCalendarById } from "../hooks/calendar"
