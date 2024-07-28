@@ -12,7 +12,11 @@ import { Button } from "../components/button";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 
 const defaultView = 'day'
-
+const statusToColor: { [key: string]: string } = {
+  atrasado:'#722735',
+  concluido: '#276e27',
+  pendente: '#31467d'
+}
 export function PlanPage() {
   const [AgendaMode, setAgendaMode] = useState(false)
   const [view, setView] = useState(defaultView)
@@ -37,7 +41,9 @@ function convertJsonToProcessedEvent(json:string|undefined):ProcessedEvent[]{
       title: event.title,
       start: new Date(event.start),
       end: new Date(event.end),
-      allDay: event.allDay
+      allDay: event.allDay,
+      color: statusToColor[event.status],
+      status: event.status
     }
   })
   return events
@@ -46,7 +52,7 @@ function convertJsonToProcessedEvent(json:string|undefined):ProcessedEvent[]{
 function addEventToSave(event:ProcessedEvent){
   const events = calendarRef.current?.scheduler.events
   if(events){
-    const newEvents = [...events,event]
+    const newEvents = [...events,{...event,color:''}]
     saveCalendarFunction(JSON.stringify(newEvents))
   }
 }
@@ -77,7 +83,7 @@ const handleConfirm = async (
         saveCalendarFunction(JSON.stringify(newEvents))
       }
     } else if (action === "create") {
-      addEventToSave({ ...event, event_id: Math.random() })
+      addEventToSave({ ...event, event_id: Math.random(),color:'' })
     }
 
     res({
@@ -122,7 +128,31 @@ const handleEventDrop = async (
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
-    },
+      primary: {
+        main: '#4ccce6',
+        contrastText:'#fff'
+      },
+      secondary: {
+        main: '#d58493',
+        contrastText:'#fff'
+      },
+      text:{
+        primary: '#fff',
+        secondary: '#fff'
+      }
+     
+      },
+      typography: {
+        fontFamily: 'Arial',
+        fontSize: 12,
+        caption:
+        {
+          fontSize: 14
+        },
+        h1: {
+          fontSize: 16
+        }}
+
   });
 
 
@@ -150,6 +180,19 @@ const handleEventDrop = async (
       ref={calendarRef}
       events={convertJsonToProcessedEvent(calendar?.content)}
       locale={ptBR}
+      fields={[
+        {
+          name: "status",
+          type: "select",
+          // Should provide options with type:"select"
+          options: [
+            { id: 1, text: "Pendente", value: 'pendente' },           
+            { id: 2, text: "Concluído", value: 'concluido' },
+            { id: 3, text: "Atrasado", value: 'atrasado' },
+          ],
+          config: { label: "Status", required: true,  errMsg: "Selecione um status" }
+        }]}
+        
       week={{
         weekDays: [0, 1, 2, 3, 4, 5], 
         weekStartOn: 6, 
