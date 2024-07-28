@@ -192,6 +192,21 @@ const handleEventDrop = async (
           ],
           config: { label: "Status", required: true,  errMsg: "Selecione um status" }
         }]}
+
+        month={{
+          weekStartOn: 0,
+          weekDays: [0, 1, 2, 3, 4, 5, 6],
+          startHour: 5,
+          endHour: 24,
+          disableGoToDay: false,
+          
+        }}
+
+      day={{
+        startHour: 5,
+        endHour: 24,
+        step: 30
+      }}
         
       week={{
         weekDays: [0, 1, 2, 3, 4, 5], 
