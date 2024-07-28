@@ -10,6 +10,7 @@ import { EventActions, ProcessedEvent, SchedulerRef } from "@aldabil/react-sched
 import { Panel } from "../components/panel";
 import { Button } from "../components/button";
 import EventNoteIcon from "@mui/icons-material/EventNote";
+import { useDarkMode, useThemeDetector } from "../hooks/useDarkMode";
 
 const defaultView = 'day'
 const statusToColor: { [key: string]: string } = {
@@ -155,7 +156,7 @@ const handleEventDrop = async (
 
   });
 
-
+const isDarkMode = useThemeDetector()
   
   return (
     <Panels.Container>
@@ -174,7 +175,7 @@ const handleEventDrop = async (
        </div>
   <div className="flex w-full flex-col gap-4 overflow-y-auto p-2">
    
-   <ThemeProvider theme={darkTheme}>
+   <ThemeProvider theme={ isDarkMode? darkTheme:null}>
    <CssBaseline />
       <Scheduler
       ref={calendarRef}
