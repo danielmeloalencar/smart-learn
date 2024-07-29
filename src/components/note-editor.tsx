@@ -29,7 +29,7 @@ import { removeLeadingEmoji } from "../utils/emoji"
 import { parseFrontmatter } from "../utils/parse-frontmatter"
 import { removeParentTags } from "../utils/remove-parent-tags"
 import { useInsertTemplate } from "./insert-template"
-//import { useMedia } from "react-use"
+import { useMedia } from "react-use"
 import MarkdownEditor from '@uiw/react-markdown-editor';
 
 
@@ -111,7 +111,7 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
     const [isTooltipOpen, setIsTooltipOpen] = React.useState(false)
     const editorSettings = getEditorSettings()
 
-   // const isDesktop = useMedia("(min-width: 640px)")
+
     // Completions
     const noteCompletion = useNoteCompletion()
     const tagSyntaxCompletion = useTagSyntaxCompletion() // #tag
@@ -400,7 +400,7 @@ function useTagPropertyCompletion() {
 function useNoteCompletion() {
   const saveNote = useSaveNote()
   const searchNotes = useStableSearchNotes()
-
+  const isDesktop = useMedia("(min-width: 640px)")
   const noteCompletion = React.useCallback(
     async (context: CompletionContext): Promise<CompletionResult | null> => {
       const word = context.matchBefore(/\[\[[^\]|^|]*/)
@@ -443,7 +443,7 @@ function useNoteCompletion() {
           detail: removeParentTags(note.tags)
             .map((tag) => `#${tag}`)
             .join(" "),
-          info: content,
+          info: isDesktop ? content : null,
           apply: (view, completion, from, to) => {
             // Insert link to note
             const text = `[[${note.id}${
