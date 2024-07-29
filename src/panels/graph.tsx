@@ -7,10 +7,11 @@ import { Panel } from "../components/panel";
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 
 export function GraphPanel({ id, params = {}, onClose }: PanelProps){
-  
+ const { layout = "centered" } = params
  const notes = useNotes()
  const { updatePanel,openPanel } = usePanelActions()
  const panel = usePanel()
+ 
 
 const refContainer = useRef<HTMLDivElement>(null);
  const [dimensions, setDimensions] = useState({
@@ -26,7 +27,7 @@ useEffect(() => {
             height: offsetHeight,
         });
     }
-}, []);
+}, [layout]);
 
  // get notes and add in array from type useNotes(): Map<string, Note>
   const notesArray = Array.from(notes.values())
