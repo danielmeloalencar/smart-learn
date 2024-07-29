@@ -11,7 +11,7 @@ import { yamlFrontmatter } from "@codemirror/lang-yaml"
 import { HighlightStyle, syntaxHighlighting } from "@codemirror/language"
 import { EditorSelection } from "@codemirror/state"
 import { EditorView, ViewUpdate } from "@codemirror/view"
-import { createTheme } from "@uiw/codemirror-themes"
+//import { createTheme } from "@uiw/codemirror-themes"
 //import CodeMirror, { ReactCodeMirrorRef } from "@uiw/react-codemirror"
 import { parseDate } from "chrono-node"
 import { useAtomCallback } from "jotai/utils"
@@ -29,7 +29,7 @@ import { removeLeadingEmoji } from "../utils/emoji"
 import { parseFrontmatter } from "../utils/parse-frontmatter"
 import { removeParentTags } from "../utils/remove-parent-tags"
 import { useInsertTemplate } from "./insert-template"
-import { useMedia } from "react-use"
+//import { useMedia } from "react-use"
 import MarkdownEditor from '@uiw/react-markdown-editor';
 
 
@@ -111,7 +111,7 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
     const [isTooltipOpen, setIsTooltipOpen] = React.useState(false)
     const editorSettings = getEditorSettings()
 
-    const isDesktop = useMedia("(min-width: 640px)")
+   // const isDesktop = useMedia("(min-width: 640px)")
     // Completions
     const noteCompletion = useNoteCompletion()
     const tagSyntaxCompletion = useTagSyntaxCompletion() // #tag
@@ -149,7 +149,6 @@ export const NoteEditor = React.forwardRef<ReactCodeMirrorRef, NoteEditorProps>(
         value={defaultValue}
         showToolbar={editorSettings.toolbars}
         enablePreview={false}
-        toolbarsMode={(isDesktop && editorSettings.toolbars)&&['fullscreen']}
         basicSetup={{
           lineNumbers: editorSettings.lineNumbers,
           foldGutter: false,
