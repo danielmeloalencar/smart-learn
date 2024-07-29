@@ -8,7 +8,7 @@ import { cx } from "../utils/cx"
 import { Button } from "./button"
 import { Card } from "./card"
 import { GitHubAvatar } from "./github-avatar"
-import { LumenLogo } from "./lumen-logo"
+import { Logo } from "./logo"
 
 const isResolvingUserAtom = selectAtom(globalStateMachineAtom, (state) =>
   state.matches("resolvingUser"),
@@ -25,7 +25,7 @@ export function GitHubAuth({ children }: { children?: React.ReactNode }) {
   return isSignedOut ? (
     <div className="flex min-h-screen items-center justify-center pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] coarse:items-end coarse:sm:items-center [@supports(min-height:100svh)]:min-h-[100svh]">
       <div className="flex w-full max-w-lg flex-col items-start px-4 py-8">
-        <LumenLogo size={24} className="mb-8" />
+        <Logo size={32} className="mb-8" />
         <h1 className="mb-1 text-xl font-semibold">Bem-vindo ao seu Segundo Cérebro</h1>
         <p className="mb-8 text-text-secondary">
         Segundo Cérebro é um aplicativo simples de anotações para pensar melhor sem sobrecarregar seu cérebro usando a metodologia Zettelkasten{" "}
