@@ -22,7 +22,7 @@ export default defineConfig({
         name: "Meu Segundo Cérebro",
         short_name: "Segundo Cérebro",
         description: "A simple note-taking app for better thinking",
-        theme_color: "#0F111A",
+        theme_color: "#000000",
         icons: [
           {
             src: "icon-1024.png",

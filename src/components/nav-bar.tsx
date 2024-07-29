@@ -30,6 +30,7 @@ import {
   TagFillIcon24,
   TagIcon24,
 } from "./icons"
+import Diversity2Icon from '@mui/icons-material/Diversity2';
 import { usePanelActions, usePanels } from "./panels"
 import { SyncStatusIcon, useSyncStatusText } from "./sync-status"
 import { Tooltip } from "./tooltip"
@@ -64,6 +65,11 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
         <li className={cx({ left: "flex-grow-0", bottom: "flex-grow" }[position])}>
           <NavLink to="/" aria-label="Notas" tooltipSide={tooltipSide} end>
             {({ isActive }) => (isActive ? <NoteFillIcon24 /> : <NoteIcon24 />)}
+          </NavLink>
+        </li>
+        <li className={cx({ left: "flex-grow-0", bottom: "flex-grow" }[position])}>
+          <NavLink to="/graph" aria-label="Rede de Conhecimento" tooltipSide={tooltipSide} end>
+            {({ isActive }) => (isActive ? <Diversity2Icon /> : <Diversity2Icon  additive="sum" />)}
           </NavLink>
         </li>
         <li className={cx({ left: "flex-grow-0", bottom: "flex-grow" }[position])}>

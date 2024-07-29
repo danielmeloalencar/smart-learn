@@ -18,6 +18,7 @@ import { TagsPage } from "./pages/tags"
 import "./styles/index.css"
 import { ShortcutPage } from "./pages/shortcuts"
 import { PlanPage } from "./pages/plan"
+import { GraphPage } from "./pages/graph"
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
@@ -27,6 +28,8 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
     </div>
   )
 }
+
+
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -44,6 +47,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
                   <Route path="settings" element={<SettingsPage />} />
                   <Route path="shortcuts" element={<ShortcutPage />} />
                   <Route path="plan/*" element={<PlanPage />} />
+                  <Route path="graph/*" element={<GraphPage />} />
                   <Route path="*" element={<NotePage />} />
 
                 </Route>

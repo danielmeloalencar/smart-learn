@@ -10,6 +10,12 @@ export function useNoteById(id: NoteId) {
   return note
 }
 
+export function useNotes() {
+  const noteAtom = React.useMemo(() => selectAtom(notesAtom, (notes) => notes), [])
+  const note = useAtomValue(noteAtom)
+  return note
+}
+
 export function useSaveNote() {
   const send = useSetAtom(globalStateMachineAtom)
 
