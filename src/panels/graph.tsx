@@ -5,7 +5,6 @@ import { useNotes } from "../hooks/note"
 import Graph from 'react-vis-network-graph'
 import { Panel } from "../components/panel";
 import Diversity2Icon from '@mui/icons-material/Diversity2';
-import { templateSchema } from "../schema";
 
 export function GraphPanel({ id, params = {}, onClose }: PanelProps){
  const { layout = "centered" } = params
