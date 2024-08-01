@@ -5,6 +5,7 @@ import { useNotes } from "../hooks/note"
 import Graph from 'react-vis-network-graph'
 import { Panel } from "../components/panel";
 import Diversity2Icon from '@mui/icons-material/Diversity2';
+import { templateSchema } from "../schema";
 
 export function GraphPanel({ id, params = {}, onClose }: PanelProps){
  const { layout = "centered" } = params
@@ -31,7 +32,9 @@ useEffect(() => {
 
  // get notes and add in array from type useNotes(): Map<string, Note>
   const notesArray = Array.from(notes.values())
-  const nodes = notesArray.map((note)=>{
+  //filtra notas removendo as que possuem template note?.frontmatter?.template)
+  const filteredNotes =   notesArray.filter((note)=> note?.frontmatter?.template === undefined || note?.frontmatter?.template === null)
+  const nodes = filteredNotes.map((note)=>{
     return {id:parseInt(note.id),label:note.title,color: '#4ccce6', title:note.title }
   })
 
