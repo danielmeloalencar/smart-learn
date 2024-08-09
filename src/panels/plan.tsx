@@ -1,3 +1,4 @@
+//
 import { Scheduler } from "@aldabil/react-scheduler"
 import { ptBR } from "date-fns/locale"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
@@ -12,8 +13,8 @@ import { useThemeDetector } from "../hooks/useDarkMode"
 import { TagIcon16 } from "../components/icons"
 import { PanelProps, usePanel } from "../components/panels"
 import { LineChart, lineElementClasses, markElementClasses } from "@mui/x-charts"
-import { useEffect } from "react"
-import { useCallback } from "react"
+import { useEffect ,useCallback } from "react"
+
 
 
 const defaultView = "day"
@@ -25,7 +26,7 @@ const statusToColor: { [key: string]: string } = {
 export function PlanPanel({ id, onClose }: PanelProps) {
   const [AgendaMode, setAgendaMode] = useState(false)
   const [view, setView] = useState(defaultView)
-  const [statistics, setStatistics] = useState({})
+  const [statistics, setStatistics] = useState<any>({})
   const [dimensions, setDimensions] = useState({
     width: 0,
     height: 0,
