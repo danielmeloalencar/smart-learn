@@ -14,7 +14,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote"
 import { useThemeDetector } from "../hooks/useDarkMode"
 import { TagIcon16 } from "../components/icons"
 import { PanelProps, usePanel } from "../components/panels"
-import { LineChart, lineElementClasses, markElementClasses,axisClasses, legendClasses ,ChartsLegendClasses } from "@mui/x-charts"
+import { LineChart, lineElementClasses, markElementClasses,axisClasses, legendClasses  } from "@mui/x-charts"
 import { useEffect ,useCallback } from "react"
 
 
