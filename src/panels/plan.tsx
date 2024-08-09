@@ -26,7 +26,7 @@ const statusToColor: { [key: string]: string } = {
 export function PlanPanel({ id, onClose }: PanelProps) {
   const [AgendaMode, setAgendaMode] = useState(false)
   const [view, setView] = useState(defaultView)
-  const [statistics, setStatistics] = useState<any>({})
+  const [statistics, setStatistics] = useState<unknown>({})
   const [dimensions, setDimensions] = useState({
     width: 0,
     height: 0,
