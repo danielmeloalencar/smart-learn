@@ -1,4 +1,4 @@
-//
+// @ts-ignore 
 import { Scheduler } from "@aldabil/react-scheduler"
 import { ptBR } from "date-fns/locale"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
@@ -26,7 +26,7 @@ const statusToColor: { [key: string]: string } = {
 export function PlanPanel({ id, onClose }: PanelProps) {
   const [AgendaMode, setAgendaMode] = useState(false)
   const [view, setView] = useState(defaultView)
-  const [statistics, setStatistics] = useState<unknown>({})
+  const [statistics, setStatistics] = useState({totalEventsConcluido:[],totalEventsAtrasados:[],uniqueDates:[]})
   const [dimensions, setDimensions] = useState({
     width: 0,
     height: 0,
@@ -34,7 +34,7 @@ export function PlanPanel({ id, onClose }: PanelProps) {
  
 const panel = usePanel()
 const layout = new URLSearchParams(panel ? panel.search : location.search).get("layout")
-console.log({layout})
+
   const saveCalendar = useSaveCalendar()
   const calendar = useCalendarById("calendar")
   const filename = "calendar"
@@ -118,7 +118,7 @@ const convertJsonToProcessedEvent = useCallback((json: string | undefined): Proc
   }
 
   const handleDelete = async (deletedId: string) => {
-    console.log("handleDelete =", deletedId)
+
     const events = calendarRef.current?.scheduler.events
     if (events) {
       const newEvents = events.filter((ev: ProcessedEvent) => ev.event_id !== deletedId)
@@ -204,8 +204,6 @@ const convertJsonToProcessedEvent = useCallback((json: string | undefined): Proc
  
   },[calendarRef,calendar?.content,convertJsonToProcessedEvent])
  
-  console.log(statistics?.totalEventsConcluido)
-
 
   const Data = statistics?.totalEventsConcluido || [];
   const Data2 = statistics?.totalEventsAtrasados || [];
