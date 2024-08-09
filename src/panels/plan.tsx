@@ -233,8 +233,8 @@ export function PlanPanel({ id, onClose }: PanelProps) {
                 step: 30,
               }}
               week={{
-                weekDays: [0, 1, 2, 3, 4, 5],
-                weekStartOn: 6,
+                weekDays: [0, 1, 2, 3, 4, 5,6],
+                weekStartOn: 1,
                 startHour: 5,
                 endHour: 24,
                 step: 30,
