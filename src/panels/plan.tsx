@@ -14,9 +14,20 @@ import EventNoteIcon from "@mui/icons-material/EventNote"
 import { useThemeDetector } from "../hooks/useDarkMode"
 import { TagIcon16 } from "../components/icons"
 import { PanelProps, usePanel } from "../components/panels"
-import { LineChart, lineElementClasses, markElementClasses,axisClasses, legendClasses  } from "@mui/x-charts"
-import { useEffect ,useCallback } from "react"
 
+import { useEffect ,useCallback } from "react"
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+ 
 
 
 const defaultView = "day"
@@ -55,6 +66,57 @@ const layout = new URLSearchParams(panel ? panel.search : location.search).get("
    return false
 
   }
+
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+
+  const options = {
+    responsive: true,
+    interaction: {
+      mode: 'index' as const,
+      intersect: false,
+    },
+    stacked: false,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Comparação de eventos concluídos, atrasados e pendentes',
+      },
+    },
+    scales: {
+      y: {
+        type: 'linear' as const,
+        display: true,
+        position: 'left' as const,
+      },
+      y1: {
+        type: 'linear' as const,
+        display: true,
+        position: 'right' as const,
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+      y2: {
+        type: 'linear' as const,
+        display: true,
+        position: 'right' as const,
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+    },
+  };
+  
+
+  
 
   // convert json string to array of processedEvents
 const convertJsonToProcessedEvent = useCallback((json: string | undefined): ProcessedEvent[] => {
@@ -201,56 +263,57 @@ const convertJsonToProcessedEvent = useCallback((json: string | undefined): Proc
       const totalEventsAtrasados = uniqueDates.map((date) => {
         return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) =>  checkIsDelayedEvent(event)).length
       })
-      setStatistics({uniqueDates, totalEventsConcluido,totalEventsAtrasados})
+
+      const totalEventsPendentes= uniqueDates.map((date) => {
+        return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) => event.status === "pendente").length
+      })
+      setStatistics({uniqueDates, totalEventsConcluido,totalEventsAtrasados,totalEventsPendentes})
     }
  
   },[calendarRef,calendar?.content,convertJsonToProcessedEvent])
  
 
+
   const Data = statistics?.totalEventsConcluido || [];
   const Data2 = statistics?.totalEventsAtrasados || [];
+  const Data3 = statistics?.totalEventsPendentes || [];
 
-const xLabels =  statistics?.uniqueDates || []
+  const xLabels =  statistics?.uniqueDates || []
+
+console.log({Data,Data2,xLabels})
+   const dataChart = {
+    labels:xLabels,
+    datasets: [
+      {
+        label: 'Atrasados',
+        data: Data2,
+        borderColor: statusToColor["atrasado"],
+        backgroundColor:  statusToColor["atrasado"],
+        yAxisID: 'y',
+      },
+      {
+        label: 'Concluídos',
+        data: Data,
+        borderColor:  statusToColor["concluido"],
+        backgroundColor:  statusToColor["concluido"],
+        yAxisID: 'y1',
+      },
+      {
+        label: 'Pendentes',
+        data: Data3,
+        borderColor:  statusToColor["pendente"],
+        backgroundColor:  statusToColor["pendente"],
+        yAxisID: 'y2',
+      },
+    ],
+  };
+ 
+ 
   return ( 
     <Panel id={id} title="Planejamento" icon={<TagIcon16 />} onClose={onClose}>
- 
+
       <div className="flex flex-col gap-2 p-4">
-      {statistics && dimensions?.width>0 && <LineChart
-      width={dimensions.width}
-      height={200}
-      colors={['cyan','red']}
-      series={[
-        { data: Data, label: 'concluidos', id: 'coId' , curve: "linear"},
-        { data: Data2, label: 'atrasados', id: 'atId' , curve: "linear"},
-      ]}
-      xAxis={[{ scaleType: 'point', data: xLabels }]}
-      sx={{
-        [`.${lineElementClasses.root}, .${markElementClasses.root}`]: {
-          strokeWidth: 1,
-          color: '#006BD6',
-        },
-        '.MuiLineElement-series-pvId': {
-          strokeDasharray: '5 5',
-        },
-        '.MuiLineElement-series-uvId': {
-          strokeDasharray: '3 4 5 2',
-        },
-        [`.${markElementClasses}:not(.${markElementClasses.highlighted})`]: {
-         fill: '#006BD6',
-          //stroke: '#006BD6',
-        }, [`.${legendClasses.root}`]:{
-          fill: '#006BD6',
-          display:'none'
-        },
-        [`.${axisClasses.tickLabel}`]: {
-         // display:'none',
-         fill: '#006BD6',
-        },
-        [`& .${markElementClasses.highlighted}`]: {
-          stroke: 'none',
-        },
-      }}
-    />}
+       {statistics && dimensions?.width>0 &&  <Line options={options} data={dataChart} style={{maxHeight:200}}/>}
         <div className="flex w-full flex-row gap-4 overflow-y-auto p-2"  ref={refContainer}>
           <Button
             title="Dia"
