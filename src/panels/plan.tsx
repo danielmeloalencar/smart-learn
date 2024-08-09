@@ -14,7 +14,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote"
 import { useThemeDetector } from "../hooks/useDarkMode"
 import { TagIcon16 } from "../components/icons"
 import { PanelProps, usePanel } from "../components/panels"
-import { LineChart, lineElementClasses, markElementClasses,axisClasses  } from "@mui/x-charts"
+import { LineChart, lineElementClasses, markElementClasses,axisClasses, legendClasses ,ChartsLegendClasses } from "@mui/x-charts"
 import { useEffect ,useCallback } from "react"
 
 
@@ -227,7 +227,7 @@ const xLabels =  statistics?.uniqueDates || []
       sx={{
         [`.${lineElementClasses.root}, .${markElementClasses.root}`]: {
           strokeWidth: 1,
-          color:"#FFF"
+          color: '#006BD6',
         },
         '.MuiLineElement-series-pvId': {
           strokeDasharray: '5 5',
@@ -236,11 +236,15 @@ const xLabels =  statistics?.uniqueDates || []
           strokeDasharray: '3 4 5 2',
         },
         [`.${markElementClasses.root}:not(.${markElementClasses.highlighted})`]: {
-          fill: '#fff',
+         // fill: '#006BD6',
+          //stroke: '#006BD6',
+        }, [`.${legendClasses.root}`]:{
+          fill: '#006BD6',
+          display:'none'
         },
         [`.${axisClasses.tickLabel}`]: {
-          //display:'none',
-          fill: '#CCC',
+         // display:'none',
+         fill: '#006BD6',
         },
         [`& .${markElementClasses.highlighted}`]: {
           stroke: 'none',
