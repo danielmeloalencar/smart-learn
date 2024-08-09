@@ -31,6 +31,16 @@ export function PlanPanel({ id, onClose }: PanelProps) {
     saveCalendar({ id: filename, content: content })
   }
 
+
+  function checkIsDelayedEvent(endDateTime: Date){
+    const now = new Date()
+    if (endDateTime < now) {
+      return statusToColor.atrasado
+    }
+   return false
+
+  }
+
   // convert json string to array of  proccessedEvents
   function convertJsonToProcessedEvent(json: string | undefined): ProcessedEvent[] {
     if (!json) return []
@@ -42,7 +52,7 @@ export function PlanPanel({ id, onClose }: PanelProps) {
         start: new Date(event.start),
         end: new Date(event.end),
         allDay: event.allDay,
-        color: statusToColor[event.status],
+        color: checkIsDelayedEvent(new Date(event.end))  || statusToColor[event.status],
         status: event.status,
       }
     })
@@ -215,9 +225,9 @@ export function PlanPanel({ id, onClose }: PanelProps) {
                   options: [
                     { id: 1, text: "Pendente", value: "pendente" },
                     { id: 2, text: "Concluído", value: "concluido" },
-                    { id: 3, text: "Atrasado", value: "atrasado" },
+                    //{ id: 3, text: "Atrasado", value: "atrasado" },
                   ],
-                  config: { label: "Status", required: true, errMsg: "Selecione um status" },
+                  config: { label: "Status", required: true, errMsg: "Selecione um status"},
                 },
               ]}
               month={{
