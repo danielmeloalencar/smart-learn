@@ -10,7 +10,11 @@ import { Button } from "../components/button"
 import EventNoteIcon from "@mui/icons-material/EventNote"
 import { useThemeDetector } from "../hooks/useDarkMode"
 import { TagIcon16 } from "../components/icons"
-import { PanelProps } from "../components/panels"
+import { PanelProps, usePanel } from "../components/panels"
+import { LineChart, lineElementClasses, markElementClasses } from "@mui/x-charts"
+import { useEffect } from "react"
+import { useCallback } from "react"
+
 
 const defaultView = "day"
 const statusToColor: { [key: string]: string } = {
@@ -21,6 +25,15 @@ const statusToColor: { [key: string]: string } = {
 export function PlanPanel({ id, onClose }: PanelProps) {
   const [AgendaMode, setAgendaMode] = useState(false)
   const [view, setView] = useState(defaultView)
+  const [statistics, setStatistics] = useState({})
+  const [dimensions, setDimensions] = useState({
+    width: 0,
+    height: 0,
+});
+ 
+const panel = usePanel()
+const layout = new URLSearchParams(panel ? panel.search : location.search).get("layout")
+console.log({layout})
   const saveCalendar = useSaveCalendar()
   const calendar = useCalendarById("calendar")
   const filename = "calendar"
@@ -30,34 +43,34 @@ export function PlanPanel({ id, onClose }: PanelProps) {
   function saveCalendarFunction(content: string) {
     saveCalendar({ id: filename, content: content })
   }
-
-
-  function checkIsDelayedEvent(endDateTime: Date){
+ 
+  function checkIsDelayedEvent(event: ProcessedEvent){
     const now = new Date()
-    if (endDateTime < now) {
+    if (new Date(event.end) < now && event.status !=='concluido') {
       return statusToColor.atrasado
     }
    return false
 
   }
 
-  // convert json string to array of  proccessedEvents
-  function convertJsonToProcessedEvent(json: string | undefined): ProcessedEvent[] {
-    if (!json) return []
-    const parsed = JSON.parse(json) as ProcessedEvent[]
-    const events = parsed.map((event: ProcessedEvent) => {
-      return {
-        event_id: event.event_id,
-        title: event.title,
-        start: new Date(event.start),
-        end: new Date(event.end),
-        allDay: event.allDay,
-        color: checkIsDelayedEvent(new Date(event.end))  || statusToColor[event.status],
-        status: event.status,
-      }
-    })
-    return events
-  }
+  // convert json string to array of processedEvents
+const convertJsonToProcessedEvent = useCallback((json: string | undefined): ProcessedEvent[] => {
+  if (!json) return [];
+  const parsed = JSON.parse(json) as ProcessedEvent[];
+  const events = parsed.map((event: ProcessedEvent) => {
+    return {
+      event_id: event.event_id,
+      title: event.title,
+      start: new Date(event.start),
+      end: new Date(event.end),
+      allDay: event.allDay,
+      color: checkIsDelayedEvent(event) || statusToColor[event.status],
+      status: event.status,
+    };
+  });
+  return events;
+}, []); // Add dependencies here if needed
+
 
   function addEventToSave(event: ProcessedEvent) {
     const events = calendarRef.current?.scheduler.events
@@ -107,7 +120,7 @@ export function PlanPanel({ id, onClose }: PanelProps) {
     console.log("handleDelete =", deletedId)
     const events = calendarRef.current?.scheduler.events
     if (events) {
-      const newEvents = events.filter((ev) => ev.event_id !== deletedId)
+      const newEvents = events.filter((ev: ProcessedEvent) => ev.event_id !== deletedId)
       saveCalendarFunction(JSON.stringify(newEvents))
     }
   }
@@ -162,11 +175,74 @@ export function PlanPanel({ id, onClose }: PanelProps) {
   })
 
   const isDarkMode = useThemeDetector()
+  const refContainer = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (refContainer.current) {
+        const { offsetWidth, offsetHeight } = refContainer.current;
+        setDimensions({
+            width: offsetWidth,
+            height: offsetHeight,
+        });
+    }
+}, [layout]);
 
-  return (
+  useEffect(()=>{
+    if(calendarRef.current){
+      const events = convertJsonToProcessedEvent(calendar?.content)
+      const dates = events.map((event:ProcessedEvent) => event.start.toISOString().slice(0, 10))
+      const uniqueDates = Array.from(new Set(dates))
+      const totalEventsConcluido = uniqueDates.map((date) => {
+        return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) => event.status === "concluido").length
+      })
+
+      const totalEventsAtrasados = uniqueDates.map((date) => {
+        return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) => event.status === "atrasado").length
+      })
+      setStatistics({uniqueDates, totalEventsConcluido,totalEventsAtrasados})
+    }
+ 
+  },[calendarRef,calendar?.content,convertJsonToProcessedEvent])
+ 
+  console.log(statistics?.totalEventsConcluido)
+
+
+  const Data = statistics?.totalEventsConcluido || [];
+  const Data2 = statistics?.totalEventsAtrasados || [];
+
+const xLabels =  statistics?.uniqueDates || []
+  return ( 
     <Panel id={id} title="Planejamento" icon={<TagIcon16 />} onClose={onClose}>
+ 
       <div className="flex flex-col gap-2 p-4">
-        <div className="flex w-full flex-row gap-4 overflow-y-auto p-2">
+      {statistics && dimensions?.width>0 && <LineChart
+      width={dimensions.width}
+      height={200}
+      colors={['cyan','red']}
+      series={[
+        { data: Data, label: 'concluidos', id: 'coId' , curve: "linear"},
+        { data: Data2, label: 'atrasados', id: 'atId' , curve: "linear"},
+      ]}
+      xAxis={[{ scaleType: 'point', data: xLabels }]}
+      sx={{
+        [`.${lineElementClasses.root}, .${markElementClasses.root}`]: {
+          strokeWidth: 1,
+          color:"#FFF"
+        },
+        '.MuiLineElement-series-pvId': {
+          strokeDasharray: '5 5',
+        },
+        '.MuiLineElement-series-uvId': {
+          strokeDasharray: '3 4 5 2',
+        },
+        [`.${markElementClasses.root}:not(.${markElementClasses.highlighted})`]: {
+          fill: '#fff',
+        },
+        [`& .${markElementClasses.highlighted}`]: {
+          stroke: 'none',
+        },
+      }}
+    />}
+        <div className="flex w-full flex-row gap-4 overflow-y-auto p-2"  ref={refContainer}>
           <Button
             title="Dia"
             onClick={() => {

@@ -6,12 +6,13 @@ import Graph from 'react-vis-network-graph'
 import { Panel } from "../components/panel";
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 
-export function GraphPanel({ id, params = {}, onClose }: PanelProps){
- const { layout = "centered" } = params
+export function GraphPanel({ id, onClose }: PanelProps){
+
  const notes = useNotes()
  const { updatePanel,openPanel } = usePanelActions()
- const panel = usePanel()
  
+ const panel = usePanel()
+ const layout = new URLSearchParams(panel ? panel.search : location.search).get("layout")
 
 const refContainer = useRef<HTMLDivElement>(null);
  const [dimensions, setDimensions] = useState({

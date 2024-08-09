@@ -35,6 +35,7 @@
     "@isomorphic-git/lightning-fs": "^4.6.0",
     "@lezer/highlight": "^1.2.0",
     "@mui/material": "^5.10.8",
+    "@mui/x-charts": "^7.12.0",
     "@mui/x-date-pickers": "^6.19.0",
     "@netlify/functions": "^2.7.0",
     "@radix-ui/colors": "^3.0.0",
