@@ -117,9 +117,6 @@ const { graph, events } = state;
           }
         
         },
-
-          shadow: true,
-          smooth: true,
           height: dimensions.height+'px',
           width:dimensions.width +'px',
         }}
