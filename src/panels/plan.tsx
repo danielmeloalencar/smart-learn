@@ -239,7 +239,7 @@ const xLabels =  statistics?.uniqueDates || []
           fill: '#fff',
         },
         [`.${axisClasses.tickLabel}`]: {
-          display:'none',
+          //display:'none',
           fill: '#CCC',
         },
         [`& .${markElementClasses.highlighted}`]: {
