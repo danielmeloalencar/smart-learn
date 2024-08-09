@@ -199,7 +199,7 @@ const convertJsonToProcessedEvent = useCallback((json: string | undefined): Proc
       })
 
       const totalEventsAtrasados = uniqueDates.map((date) => {
-        return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) => event.status === "atrasado").length
+        return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) =>  checkIsDelayedEvent(event)).length
       })
       setStatistics({uniqueDates, totalEventsConcluido,totalEventsAtrasados})
     }
@@ -235,8 +235,8 @@ const xLabels =  statistics?.uniqueDates || []
         '.MuiLineElement-series-uvId': {
           strokeDasharray: '3 4 5 2',
         },
-        [`.${markElementClasses.root}:not(.${markElementClasses.highlighted})`]: {
-         // fill: '#006BD6',
+        [`.${markElementClasses}:not(.${markElementClasses.highlighted})`]: {
+         fill: '#006BD6',
           //stroke: '#006BD6',
         }, [`.${legendClasses.root}`]:{
           fill: '#006BD6',
