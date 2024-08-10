@@ -25,8 +25,10 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
+  BarElement,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
  
 
 
@@ -74,40 +76,49 @@ const layout = new URLSearchParams(panel ? panel.search : location.search).get("
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    ArcElement,
+    BarElement
   );
 
   const options = {
+    legend: {
+      display: false
+    },
     responsive: true,
     interaction: {
       mode: 'index' as const,
-      intersect: false,
+      intersect: true,
     },
     stacked: false,
     plugins: {
       title: {
         display: true,
-        text: 'Comparação de eventos concluídos, atrasados e pendentes',
+        text: 'Comparação por dia',
       },
+      
     },
     scales: {
       y: {
         type: 'linear' as const,
-        display: true,
+        display: false,
         position: 'left' as const,
+        grid: {
+          drawOnChartArea: false,
+        },
       },
       y1: {
         type: 'linear' as const,
-        display: true,
-        position: 'right' as const,
+        display: false,
+        position: 'left' as const,
         grid: {
           drawOnChartArea: false,
         },
       },
       y2: {
         type: 'linear' as const,
-        display: true,
-        position: 'right' as const,
+        display: false,
+        position: 'left' as const,
         grid: {
           drawOnChartArea: false,
         },
@@ -265,7 +276,7 @@ const convertJsonToProcessedEvent = useCallback((json: string | undefined): Proc
       })
 
       const totalEventsPendentes= uniqueDates.map((date) => {
-        return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) => event.status === "pendente").length
+        return events.filter((event:ProcessedEvent) => event.start.toISOString().slice(0, 10) === date).filter((event) => (event.status === "pendente" && !checkIsDelayedEvent(event))).length
       })
       setStatistics({uniqueDates, totalEventsConcluido,totalEventsAtrasados,totalEventsPendentes})
     }
@@ -274,37 +285,38 @@ const convertJsonToProcessedEvent = useCallback((json: string | undefined): Proc
  
 
 
-  const Data = statistics?.totalEventsConcluido || [];
-  const Data2 = statistics?.totalEventsAtrasados || [];
-  const Data3 = statistics?.totalEventsPendentes || [];
+  const concluidos = statistics?.totalEventsConcluido || [];
+  const atrasados = statistics?.totalEventsAtrasados || [];
+  const pendentes = statistics?.totalEventsPendentes || [];
 
   const xLabels =  statistics?.uniqueDates || []
 
-console.log({Data,Data2,xLabels})
+console.log({concluidos,atrasados,pendentes,xLabels})
    const dataChart = {
     labels:xLabels,
+    
     datasets: [
       {
         label: 'Atrasados',
-        data: Data2,
+        data: atrasados,
         borderColor: statusToColor["atrasado"],
         backgroundColor:  statusToColor["atrasado"],
         yAxisID: 'y',
       },
       {
         label: 'Concluídos',
-        data: Data,
+        data: concluidos,
         borderColor:  statusToColor["concluido"],
         backgroundColor:  statusToColor["concluido"],
         yAxisID: 'y1',
       },
       {
         label: 'Pendentes',
-        data: Data3,
+        data: pendentes,
         borderColor:  statusToColor["pendente"],
         backgroundColor:  statusToColor["pendente"],
         yAxisID: 'y2',
-      },
+      }
     ],
   };
  
@@ -313,7 +325,7 @@ console.log({Data,Data2,xLabels})
     <Panel id={id} title="Planejamento" icon={<TagIcon16 />} onClose={onClose}>
 
       <div className="flex flex-col gap-2 p-4">
-       {statistics && dimensions?.width>0 &&  <Line options={options} data={dataChart} style={{maxHeight:200}}/>}
+       {statistics && dimensions?.width>0 &&  <Bar options={options} data={dataChart} style={{maxHeight:200}}/>}
         <div className="flex w-full flex-row gap-4 overflow-y-auto p-2"  ref={refContainer}>
           <Button
             title="Dia"
