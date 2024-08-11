@@ -19,6 +19,7 @@ import "./styles/index.css"
 import { ShortcutPage } from "./pages/shortcuts"
 import { PlanPage } from "./pages/plan"
 import { GraphPage } from "./pages/graph"
+import { DocumentationPage } from "./pages/documentation"
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
@@ -46,6 +47,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
                   <Route path="file" element={<FilePage />} />
                   <Route path="settings" element={<SettingsPage />} />
                   <Route path="shortcuts" element={<ShortcutPage />} />
+                  <Route path="documentation" element={<DocumentationPage />} />
                   <Route path="plan/*" element={<PlanPage />} />
                   <Route path="graph/*" element={<GraphPage />} />
                   <Route path="*" element={<NotePage />} />
