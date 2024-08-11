@@ -35,7 +35,6 @@ useEffect(() => {
   //filtra notas removendo as que possuem template note?.frontmatter?.template)
   const filteredNotes =   notesArray.filter((note)=> note?.frontmatter?.template === undefined || note?.frontmatter?.template === null)
   const nodes = filteredNotes.map((note)=>{
-    if(note.title)
     return {id:parseInt(note.id),label:note.title,color: '#4ccce6', title:note.title }
   })
 
