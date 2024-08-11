@@ -38,7 +38,7 @@ useEffect(() => {
     return {id:parseInt(note.id),label:note.title,color: '#4ccce6', title:note.title }
   })
 
-  
+
 // cria uma função que percorre cada item do array, pega titulo da nota e seus backlinks , 
 // onde cada nó é uma nota e cada aresta é uma ligação entre as notas, usando typscript
   const edges = notesArray.map((note) => {
@@ -56,6 +56,7 @@ const [state] = useState({
     nodes: nodes,
     edges: edges
   },
+  
   events: {
    /* select: ({ nodes, edges }) => {
       console.log("Selected nodes:");
@@ -94,7 +95,12 @@ const { graph, events } = state;
       id="dasd"
             graph={graph}
             key={ dimensions.height}
-            options= {{physics: {
+            options= {{
+            layout:{
+              randomSeed:'asdasddaas',
+              improvedLayout:true,
+                },
+              physics: {
               enabled: true
           },
           interaction: {
@@ -103,18 +109,18 @@ const { graph, events } = state;
           nodes: {
             shape: "dot",
               borderWidth: 1,
-              size: 10,
+              size: 5,
               color: {
    
               },
-              font: {color: "#666666"}
+              font: {color: "#666666", size:8}
           },
           edges:{
             arrows: {to: {enabled: true, scaleFactor:1, type:'arrow'}},
             
             color: "#666666",
             smooth: {
-              type: "dynamic" //'dynamic', 'continuous', 'discrete', 'diagonalCross', 'straightCross', 'horizontal', 'vertical', 'curvedCW', 'curvedCCW', 'cubicBezier'
+              type: "cubicBezier" //'dynamic', 'continuous', 'discrete', 'diagonalCross', 'straightCross', 'horizontal', 'vertical', 'curvedCW', 'curvedCCW', 'cubicBezier'
           }
         
         },
