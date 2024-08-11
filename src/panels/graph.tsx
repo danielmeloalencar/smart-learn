@@ -33,7 +33,7 @@ useEffect(() => {
  // get notes and add in array from type useNotes(): Map<string, Note>
   const notesArray = Array.from(notes.values())
   //filtra notas removendo as que possuem template note?.frontmatter?.template)
-  const filteredNotes =   notesArray.filter((note)=> (note?.frontmatter?.template === undefined || note?.frontmatter?.template === null) && (note.title !==undefined && note.title !==null))
+  const filteredNotes =   notesArray.filter((note)=> (note?.frontmatter?.template === undefined || note?.frontmatter?.template === null) && (note.title?.length > 3))
   const nodes = filteredNotes.map((note)=>{
     return {id:parseInt(note.id),label:note.title,color: '#4ccce6', title:note.title }
   })
