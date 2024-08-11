@@ -132,9 +132,7 @@ export function NavBar({ position }: { position: "left" | "bottom" }) {
                 Compartilhar feedback
               </DropdownMenu.Item>
               <DropdownMenu.Item
-                href="https://danielmeloalencar.github.io/smart-learn/"
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() => navigate("/documentation")}
               >
                 Documentação
               </DropdownMenu.Item>
