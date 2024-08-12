@@ -33,12 +33,12 @@ useEffect(() => {
  // get notes and add in array from type useNotes(): Map<string, Note>
   const notesArray = Array.from(notes.values())
   //filtra notas removendo as que possuem template note?.frontmatter?.template)
-  const filteredNotes =   notesArray.filter((note)=> (note?.frontmatter?.template === undefined || note?.frontmatter?.template === null) && (note.title?.length > 3))
+  const filteredNotes =   notesArray.filter((note)=> (note?.frontmatter?.template === undefined || note?.frontmatter?.template === null) && (note.tags.includes('nota-permanente')))
   const nodes = filteredNotes.map((note)=>{
-    return {id:parseInt(note.id),label:note.title,color: '#4ccce6', title:note.title }
+    return {id:parseInt(note.id),label:note.title || 'Sem Título',color: '#4ccce6', title:note.title }
   })
 
-
+console.log({notes})
 // cria uma função que percorre cada item do array, pega titulo da nota e seus backlinks , 
 // onde cada nó é uma nota e cada aresta é uma ligação entre as notas, usando typscript
   const edges = notesArray.map((note) => {

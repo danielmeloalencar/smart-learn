@@ -331,6 +331,11 @@ function dateCompletion(context: CompletionContext): CompletionResult | null {
  * @example #tag
  */
 function useTagSyntaxCompletion() {
+  const defaultTags = {
+    'nota-rapida':[],
+    'nota-literaria':[],
+    'nota-permanente':[]
+  }
   const getTags = useAtomCallback(React.useCallback((get) => get(tagsAtom), []))
 
   const tagCompletion = React.useCallback(
@@ -341,7 +346,7 @@ function useTagSyntaxCompletion() {
         return null
       }
 
-      const tags = Object.entries(getTags())
+      const tags = Object.entries({...defaultTags,...getTags()})
         // Sort tags by frequency
         .sort((a, b) => b[1].length - a[1].length)
         .map(([name]) => name)
